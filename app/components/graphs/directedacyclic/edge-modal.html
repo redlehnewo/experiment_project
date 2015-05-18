@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add/Edit Edge</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" ng-submit="onSubmit();">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Type:</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="edgetype" value="arrow" ng-model="edge.style"/>
+                    Leading
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="edgetype" value="dash-line" ng-model="edge.style"/>
+                    Sequential
+                </label>
+            </div>
+        </div>
+        <div class="form-group" ng-show="edge.style=='arrow'">
+            <label for="leadid" class="col-sm-2 control-label">Lead Answer:</label>
+            <div class="col-sm-4">
+                <input class="form-control" id="leadid" type="text" placeholder="Enter lead answer" ng-model="edge.label"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fromid" class="col-sm-2 control-label">From:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="fromid" type="text" placeholder="Enter node ID" ng-model="edge.from"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="toid" class="col-sm-2 control-label">To:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="toid" type="text" placeholder="Enter node ID" ng-model="edge.to"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit Edge</button>
+            </div>
+        </div>
+    </form>
+</div>

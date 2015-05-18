@@ -1,0 +1,9 @@
+.idea/**/*.*
+app/node_modules
+app/bower_components
+app/js/build
+target/*
+app/ROOT
+
+app/js/config.js
+npm-debug.log
