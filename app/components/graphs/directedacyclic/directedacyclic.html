@@ -1,86 +1,5 @@
 <div style="margin:20px">
-    <div class="row hidden">
-        <div class="col-sm-6" style="padding:45px 15px 15px">
-            <h5>Add Node</h5>
-            <form class="form-horizontal" ng-submit="addNode();">
-                <div class="form-group">
-                    <label for="nodetype" class="col-sm-2 control-label">Type:</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="nodetype" placeholder="Select Node Type" ng-model="node.group">
-                            <option value="gates">Gates</option>
-                            <option value="prescriptive">Prescriptive Question Block</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="nodeid" class="col-sm-2 control-label">ID:</label>
-                    <div class="col-sm-3">
-                        <input class="form-control" id="nodeid" type="text" placeholder="Enter node ID" ng-model="node.id"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="nodelabel" class="col-sm-2 control-label">Label:</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="nodelabel" type="text" rows="5" placeholder="Enter node label" ng-model="node.label"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Submit Node</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-sm-6" style="padding:45px 15px 15px">
-            <h5>Add Edge</h5>
-            <form class="form-horizontal" ng-submit="addEdge();">
-                <div class="form-group">
-                    <label for="edgetype" class="col-sm-2 control-label">Type:</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="edgetype" placeholder="Select Edge Type" ng-model="edge.shape">
-                            <option value="arrow">Leading</option>
-                            <option value="dash-line">Sequential</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="leadid" class="col-sm-2 control-label">Lead Answer:</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" id="leadid" type="text" placeholder="Enter lead answer" ng-model="edge.label"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="fromid" class="col-sm-2 control-label">From:</label>
-                    <div class="col-sm-3">
-                        <input class="form-control" id="fromid" type="text" placeholder="Enter node ID" ng-model="edge.from"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="toid" class="col-sm-2 control-label">To:</label>
-                    <div class="col-sm-3">
-                        <input class="form-control" id="toid" type="text" placeholder="Enter node ID" ng-model="edge.to"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Submit Edge</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!--<div class="panel">
-        <h5>Cytoscape.js</h5>
-        <div angular-cytoscape="" id="cy" style="border: 1px solid; width:100%; height: 500px;"></div>
-    </div>-->
     <div class="cleafix"></div>
-    <!--<div class="panel">
-        <h5>Visjs - Heirarchy</h5>
-        <div angular-vis="" vis-nodes="nodes" vis-edges="edges" vis-options="options" style="border: 1px solid"></div>
-    </div>-->
-
     <div class="panel">
         <div class="row">
             <div class="col-md-10">
@@ -90,6 +9,10 @@
                      style="border: 1px solid;"></div>
             </div>
             <div class="col-md-2">
+                <div style="margin-top:30px;">
+                    <button class="btn btn-primary" ng-click="loadCoppaSample();" style="margin-bottom: 10px;">Load COPPA Sample</button>
+                    <button class="btn btn-danger" ng-click="clearGraph();">Clear Graph</button>
+                </div>
 
             </div>
         </div>

@@ -8,27 +8,23 @@ angular.module('myapp.dag',['myapp.nodeModal'])
             $scope.nodes = new vis.DataSet();
             $scope.edges = new vis.DataSet();
 
-            $scope.nodes.on('add', function callback(event, properties, senderId){
-                properties.items && properties.items.length && properties.items.each(function(n){
-                    var node = $scope.nodes.get(n);
-                    if(node){
-                        node.fixed = true;
-                        node.physics = false;
+            $scope.loadCoppaSample = function() {
+                $scope.clearGraph();
+                SurveyGraph.get(function success(graph){
+                    if(graph) {
+                        graph.nodes && $scope.nodes.add(graph.nodes);
+                        graph.edges && $scope.edges.add(graph.edges);
                     }
-                })
-            });
+                });
+            }
 
-            SurveyGraph.get(function success(graph){
-                if(graph) {
-                    graph.nodes && $scope.nodes.add(graph.nodes);
-                    graph.edges && $scope.edges.add(graph.edges);
-                }
-            });
+            $scope.clearGraph = function() {
+                $scope.nodes.clear();
+                $scope.edges.clear();
+            }
         }
 
         runOnce();
-
-        var defaultOptions  = angular.copy(VisDefaultOptions);
     })
 
     .constant('VisDefaultOptions', {
@@ -116,12 +112,12 @@ angular.module('myapp.dag',['myapp.nodeModal'])
                 function setNodesMovable(nodes, isMovable) {
                     scope.network.storePositions();
                     var updates = [];
-                    console.log(nodes);
                     nodes.each(function(node) {
                         var update = {
                             id : node.id,
-                            allowedToMoveX : isMovable,
-                            allowedToMoveY : isMovable
+                            /*isMovable : isMovable,
+                             allowedToMoveY : isMovable*/
+                            fixed : { x : isMovable, y : isMovable}
                         };
                         updates.push(update);
                     });
@@ -169,8 +165,8 @@ angular.module('myapp.dag',['myapp.nodeModal'])
                                 node.fixed = { x: false, y : false};
                                 callback(node); // needed to update the graph
                             });
-                        },
-                        editNode : function(data, callback) {
+                        }
+                        /*,editNode : function(data, callback) {
                             // This flag indicates Edit Node was clicked
                             // TODO: This is just a work around since visjs calls this method 3 times
                             if(this.isOnEdit)
@@ -194,7 +190,7 @@ angular.module('myapp.dag',['myapp.nodeModal'])
                                 callback(node); // needed to update the graph
                                 resetEditFlag();
                             }, function cancel() { resetEditFlag()});
-                        }
+                        }*/
                         , addEdge : function(data, callback) {
                             if(data.from == data.to)
                                 return;
@@ -218,8 +214,8 @@ angular.module('myapp.dag',['myapp.nodeModal'])
                 scope.network = new vis.Network(elem[0], { nodes: scope.nodes, edges: scope.edges }, options);
                 scope.network.once('stabilized', function(e){
                     scope.network.storePositions();
+                    setNodesMovable(scope.nodes.get(), false);
                     scope.network.fit();
-                    console.log("Stabilized!!!" + e.iterations);
                 });
             }
         }
