@@ -7,10 +7,13 @@ angular.module('myapp',[
         'ui.bootstrap',
         'ui.router',
         'myapp.config',
+        'myapp.restServices',
         'myapp.modalService',
         'myapp.dag',
         'myapp.nodeModal',
-        'myapp.edgeModal'
+        'myapp.edgeModal',
+        'myapp.mockServerModel',
+        'myapp.mockBackend'
     ])
     .controller('mainCtrl', function($scope, $state) {
         $scope.view = 'graphs'

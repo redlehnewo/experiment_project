@@ -4,6 +4,7 @@
 angular.module('myapp.edgeModal',[])
     .controller('edgeModalCtrl', function($scope, $modalInstance, instance){
         $scope.edge = angular.copy(instance) || {};
+        //Object.merge($scope.edge, instance, true);
         $scope.onSubmit = function() {
             $modalInstance.close($scope.edge);
         }

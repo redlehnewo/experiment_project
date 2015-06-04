@@ -18,7 +18,9 @@ module.exports = function(grunt) {
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.js ',
                     'bower_components/vis/dist/vis.js',
-                    'bower_components/cytoscape/dist/cytoscape.js'
+                    'bower_components/cytoscape/dist/cytoscape.js',
+                    'bower_components/angular-mocks/angular-mocks.js',
+                    'bower_components/angular-resource/angular-resource.js'
                 ],
                 dest: 'js/build/vendor.js'
             },

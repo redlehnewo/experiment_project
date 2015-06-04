@@ -4,6 +4,7 @@
 angular.module('myapp.nodeModal',[])
     .controller('nodeModalCtrl', function($scope, $modalInstance, nodeInstance){
         $scope.node = angular.copy(nodeInstance) || {};
+        //Object.merge($scope.node, nodeInstance, true);
         $scope.addNode = function() {
             $modalInstance.close($scope.node);
         }
