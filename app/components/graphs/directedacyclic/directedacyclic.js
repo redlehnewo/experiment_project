@@ -9,14 +9,12 @@ angular.module('myapp.dag',['myapp.nodeModal'])
             $scope.edges = new vis.DataSet();
 
             $scope.nodes.on('add', function callback(event, properties, senderId){
-                //console.log(properties);
                 properties.items && properties.items.length && properties.items.each(function(n){
                     var node = $scope.nodes.get(n);
                     if(node){
                         node.fixed = true;
                         node.physics = false;
                     }
-                    console.log(node);
                 })
             });
 
@@ -30,73 +28,8 @@ angular.module('myapp.dag',['myapp.nodeModal'])
 
         runOnce();
 
-        //-- Data Manipulation Options
-        /*$scope.options = {
-            physics: {
-                hierarchicalRepulsion : { nodeDistance: 200 }
-            },
-            hierarchicalLayout: {
-                direction: 'LR'
-                , levelSeparation: 250
-                , nodeSpacing: 250
-                , layout : 'direction'
-            }
-        };*/
-
         var defaultOptions  = angular.copy(VisDefaultOptions);
-        //defaultOptions.physics && (delete defaultOptions.physics);
-        //defaultOptions.hierarchicalLayout && (delete defaultOptions.hierarchicalLayout);
-        //$scope.visBarnesHutOptions = angular.extend(defaultOptions, VisBarnesHutOptions);
-
-        //$scope.visBarnesHutOptions = angular.extend({},VisDefaultOptions);
     })
-
-    /*.constant('VisDefaultOptions', {
-        width: '100%',
-        height: '500px',
-        autoResize : true,
-        groups : {
-            gates : {
-                shape : 'diamond'
-            }, prescriptive : {
-                shape : 'box',
-                color : '#CDFFC3'
-            }
-        },
-        interaction:{
-            dragNodes:true,
-            dragView: true,
-            hideEdgesOnDrag: false,
-            hideNodesOnDrag: false,
-            hover: false,
-            keyboard: {
-                enabled: false,
-                speed: {x: 10, y: 10, zoom: 0.02},
-                bindToWindow: true
-            },
-            navigationButtons: false,
-            selectable: true,
-            selectConnectedEdges: true,
-            tooltipDelay: 300,
-            zoomView: true
-        },
-        edges:{
-            smooth : false
-        },
-        layout: {
-            "hierarchical": {
-                "enabled": true,
-                "direction": "LR",
-                "sortMethod": "directed"
-            }
-        },
-        physics: {
-            "hierarchicalRepulsion": {
-                "centralGravity": 0
-            },
-            "solver": "hierarchicalRepulsion"
-        }
-    })*/
 
     .constant('VisDefaultOptions', {
         width: '100%',
@@ -288,146 +221,6 @@ angular.module('myapp.dag',['myapp.nodeModal'])
                     scope.network.fit();
                     console.log("Stabilized!!!" + e.iterations);
                 });
-            }
-        }
-    })
-
-    .factory('DiamondImg', function (text) {
-        var data =
-            '<svg xmlns="http://www.w3.org/2000/svg" width="243" height="65">' +
-                '<rect x="0" y="0" width="100%" height="100%" fill="#7890A7" stroke-width="20" stroke="#ffffff" ></rect>' +
-                '<foreignObject x="15" y="10" width="100%" height="100%">' +
-                    '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:40px" class="diamond">' +
-                        '<span>' + text + '</span>' +
-                    '</div>' +
-                '</foreignObject>' +
-            '</svg>';
-
-
-        var DOMURL = window.URL || window.webkitURL || window;
-        var img = new Image();
-        var svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-        var url = DOMURL.createObjectURL(svg);
-
-        return url;
-    })
-
-    .directive('angularCytoscape', function($timeout){
-        return {
-            scope : {
-            },
-            link : function(scope, elem, attrs) {
-
-                scope.layout = {
-                    name: 'breadthfirst',
-                    directed : false,
-                    padding: 10
-                }
-
-                scope.style = cytoscape.stylesheet()
-                    .selector('node')
-                    .css({
-                        'shape': 'data(faveShape)',
-                        'width': '100px',
-                        'font-size' : '5px',
-                        'font-weight' : 'bold',
-                        'text-wrap' : 'wrap',
-                        'text-max-width': '80px',
-                        'content': 'data(name)',
-                        'text-valign': 'center',
-                        'text-outline-width': 2,
-                        'text-outline-color': 'data(faveColor)',
-                        'background-color': 'data(faveColor)',
-                        'color': '#fff'
-                    })
-                    .selector(':selected')
-                    .css({
-                        'border-width': 3,
-                        'border-color': '#333'
-                    })
-                    .selector('edge')
-                    .css({
-                        'opacity': 0.666,
-                        'width': 'mapData(strength, 70, 100, 2, 6)',
-                        'target-arrow-shape': 'triangle',
-                        'line-color': 'data(faveColor)',
-                        'source-arrow-color': 'data(faveColor)',
-                        'target-arrow-color': 'data(faveColor)'
-                    })
-                    .selector('edge.questionable')
-                    .css({
-                        'line-style': 'dotted',
-                        'target-arrow-shape': 'diamond'
-                    })
-                    .selector('.faded')
-                    .css({
-                        'opacity': 0.25,
-                        'text-opacity': 0
-                    });
-
-                var _nodes = [
-                    { data: { id: 'j', name: 'The quick brown fox jumps over the lazy dog by the river bank.', weight: 65, faveColor: '#6FB1FC', faveShape: 'diamond' } },
-                    { data: { id: 'e', name: 'Elaine', weight: 45, faveColor: '#EDA1ED', faveShape: 'ellipse' } },
-                    { data: { id: 'k', name: 'The quick brown fox jumps over the lazy dog.', weight: 100, faveColor: '#86B342', faveShape: 'rectangle' } },
-                    { data: { id: 'g', name: 'George', weight: 70, faveColor: '#F5A45D', faveShape: 'rectangle' } }
-                ];
-
-                var _edges = [
-                    { data: { source: 'j', target: 'e', faveColor: '#6FB1FC', strength: 90 } },
-                    { data: { source: 'j', target: 'k', faveColor: '#6FB1FC', strength: 70 } },
-                    { data: { source: 'j', target: 'g', faveColor: '#6FB1FC', strength: 80 } },
-
-                    { data: { source: 'e', target: 'j', faveColor: '#EDA1ED', strength: 95 } },
-                    { data: { source: 'e', target: 'k', faveColor: '#EDA1ED', strength: 60 }, classes: 'questionable' },
-
-                    { data: { source: 'k', target: 'j', faveColor: '#86B342', strength: 100 } },
-                    { data: { source: 'k', target: 'e', faveColor: '#86B342', strength: 100 } },
-                    { data: { source: 'k', target: 'g', faveColor: '#86B342', strength: 100 } },
-
-                    { data: { source: 'g', target: 'j', faveColor: '#F5A45D', strength: 90 } }
-                ];
-
-                function redraw() {
-
-                }
-
-                function destroy() {
-
-                }
-
-                scope.$watch('data', function(newVal) {
-                    if(scope.data) {
-
-                    }
-                });
-
-                $(elem[0]).cytoscape({
-                    layout: scope.layout,
-                    style : scope.style,
-                    elements : {
-                        nodes : _nodes,
-                        edges : _edges
-                    },
-                    ready : function() {
-                        scope.cy = this;
-                        scope.cy.fit();
-                    }
-                });
-
-                /*$timeout(function() {
-                    _nodes.each(function(node) {
-                        node.group = 'nodes';
-                        scope.cy.add(node);
-                    });
-
-                    _edges.each(function(edge) {
-                        edge.group = 'edges';
-                        scope.cy.add(edge);
-                    });
-
-                    scope.cy.fit();
-                    scope.cy.forceRender();
-                },1000);*/
             }
         }
     })
