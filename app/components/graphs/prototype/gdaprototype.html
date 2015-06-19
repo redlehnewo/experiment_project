@@ -1,0 +1,39 @@
+<div class="panel">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:55px;position: relative">
+                    <button class="btn btn-success" style="position: absolute; top:10px;"><i class="glyphicon glyphicon-plus-sign"></i> Create New</button>
+                    <h5 class="panel-title text-center" style="margin-top: 5px;">Gates ( {{gates.length || 0}} )</h5>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item" ng-repeat="gate in gates">
+                        <a class="btn btn-white" title="Add Gate" ng-click="addNode(gate)"
+                           style="background-color: transparent;position: absolute; top: 0; left:0;">
+                            <i class="glyphicon glyphicon-plus-sign"></i>
+                        </a>
+                        <p class="list-group-item-text text-justify" style="margin-left: 20px;">{{gate.label}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h5 class="panel-title text-center" style="margin-top: 5px;">Prescriptive Question Block ( {{prescriptives.length || 0}} )</h5>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item" ng-repeat="prescriptive in prescriptives">
+                        <a class="btn btn-white" type="button" title="" ng-click="addNode(prescriptive)"
+                           style="background-color: transparent;position: absolute; top: 0; left:0;">
+                            <i class="glyphicon glyphicon-plus-sign"></i>
+                        </a>
+                        <p class="list-group-item-text" style="padding-left: 20px;">{{prescriptive.label}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div angular-vis-network="" vis-nodes="nodes" vis-edges="edges" vis-options="visOptions"
+                 style="border: 1px solid;"></div>
+        </div>
+    </div>
+</div>

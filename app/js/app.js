@@ -13,14 +13,16 @@ angular.module('myapp',[
         'myapp.nodeModal',
         'myapp.edgeModal',
         'myapp.mockServerModel',
-        'myapp.mockBackend'
+        'myapp.mockBackend',
+        'myapp.gdaprototype',
+        'ngVis'
     ])
     .controller('mainCtrl', function($scope, $state) {
-        $scope.view = 'graphs'
+        $scope.view = 'gdaprototype'
         $scope.setView = function(view) {
             $scope.view = view;
         }
-        $state.go('myapp.dag')
+        $state.go('myapp.gdaprototype')
 
     })
 

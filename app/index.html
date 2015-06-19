@@ -31,12 +31,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li ng-class="{active : view == 'gdaprototype'}"><a ui-sref="myapp.gdaprototype" ng-click="setView('gdaprototype')">GDA Prototype</a></li>
                     <li ng-class="{active : view == 'graphs'}"><a ui-sref="myapp.dag" ng-click="setView('graphs')">Graphs</a></li>
                     <li ng-class="{active : view == 'addmore'}"><a href="#" ng-click="setView('addmore')">To Add More</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="mainpanel" ui-view></div>
+    <div class="mainpanel" style="padding:10px;" ui-view></div>
 </body>
 </html>
