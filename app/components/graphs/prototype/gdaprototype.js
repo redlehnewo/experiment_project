@@ -10,42 +10,34 @@
             $scope.edges = new vis.DataSet();;
             $scope.visOptions = {
                 manipulation: {
-                    initiallyActive: true,
-                    addNode: function (data, callback) {
-                        var modalInstance = $modal.open({
-                            templateUrl: 'components/graphs/directedacyclic/node-modal.html',
-                            controller: 'nodeModalCtrl',
-                            size: 'lg',
-                            resolve: {
-                                nodeInstance: function () {
-                                    return data;
-                                }
-                            }
-                        });
-                        modalInstance.result.then(function (node) {
-                            node.physics = false;
-                            node.fixed = { x: false, y: false};
-                            callback(node); // needed to update the graph
-                        });
-                    },
-                    addEdge: function (data, callback) {
+                    initiallyActive: true
+                    , addNode : false
+                    , addEdge : function (data, callback) {
                         if (data.from == data.to)
                             return;
+
+                        var from = $scope.nodes.get(data.from);
+                        var to = $scope.nodes.get(data.to);
 
                         var modalInstance = $modal.open({
                             templateUrl: 'components/graphs/directedacyclic/edge-modal.html',
                             controller: 'edgeModalCtrl',
                             size: 'lg',
                             resolve: {
-                                instance: function () {
-                                    return data;
-                                }
+                                instance: function () { return data; }
+                                , from  : function() { return from; }
+                                , to : function() { return to; }
                             }
                         });
                         modalInstance.result.then(function success(edge) {
+                            edge.dashes = (edge.type === 'sequence');
                             callback(edge); // needed to update the graph\
                         });
                     }
+                    , editEdge : false
+                },
+                interaction : {
+                    multiselect : true
                 }
             }
 
