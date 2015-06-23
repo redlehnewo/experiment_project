@@ -38,6 +38,9 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <div class="alerts">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" style="width:400px;">{{alert.msg}}</alert>
+    </div>
     <div class="mainpanel" style="padding:10px;" ui-view></div>
 </body>
 </html>

@@ -13,8 +13,11 @@ angular.module('myapp',[
         'myapp.nodeModal',
         'myapp.edgeModal',
         'myapp.mockServerModel',
-        'myapp.mockBackend',
+        //'myapp.mockBackend',
         'myapp.gdaprototype',
+        'myapp.questionblock-modal',
+        'myapp.ui.custompager',
+        'myapp.ui.alertService',
         'ngVis'
     ])
     .controller('mainCtrl', function($scope, $state) {

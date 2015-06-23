@@ -1,0 +1,27 @@
+<div class="panel">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:55px;position: relative">
+                    <button class="btn btn-success" style="position: absolute; top:10px; left:5px;" ng-click="addGate()"><i class="glyphicon glyphicon-plus-sign"></i> Create</button>
+                    <h5 class="panel-title text-center" style="margin-top: 5px;">Gates <span class="badge">{{gates.length || 0}}</span></h5>
+                    <custom-pager ng-model="pagination.gates.currentPage" total-items="pagination.gates.totalItems" style="position: absolute; top:10px; right:5px;" ng-model="page.gates" ng-change="onPageChange('gates')"></custom-pager>
+                </div>
+                <gda-question-block-list block-list="gates" on-add-node="addNode"></gda-question-block-list>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:55px;position: relative">
+                    <button class="btn btn-success" style="position: absolute; top:10px; left:5px;" ng-click="addGate()"><i class="glyphicon glyphicon-plus-sign"></i> Create</button>
+                    <h5 class="panel-title text-center" style="margin-top: 5px;">Prescriptive Question Blocks <span class="badge">{{prescriptives.length || 0}}</span></h5>
+                    <custom-pager ng-model="pagination.gates.currentPage" total-items="pagination.gates.totalItems" style="position: absolute; top:10px; right:5px;" ng-model="page.gates" ng-change="onPageChange('gates')"></custom-pager>
+                </div>
+                <gda-question-block-list block-list="controls" on-add-node="addNode"></gda-question-block-list>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <h5>View Graph : </h5>
+            <div angular-vis-network="" vis-nodes="nodes" vis-edges="edges" vis-options="visOptions"
+                 style="border: 1px solid;"></div>
+        </div>
+    </div>
+</div>

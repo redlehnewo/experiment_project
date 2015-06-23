@@ -1,0 +1,12 @@
+<div class="list-group">
+    <div class="list-group-item" ng-repeat="block in blockList">
+        <a class="btn btn-white" title="Add to graph" ng-click="onAddNode(block)" ng-disabled="block.isAdded"
+           style="background-color: transparent;position: absolute; top: 0; left:0;">
+            <i class="glyphicon" ng-class="block.isAdded ? 'glyphicon-check btn-green' : 'glyphicon-plus-sign'"></i>
+        </a>
+        <p class="list-group-item-text text-justify" style="margin-left: 20px;">{{block.label}}</p>
+    </div>
+    <div class="list-group-item" ng-show="!blockList || !blockList.length">
+        <i>No items for this list.</i>
+    </div>
+</div>

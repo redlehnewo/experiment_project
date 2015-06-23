@@ -6566,3 +6566,6 @@ button.close {
   border: 50px solid transparent;
   border-top-color: red;
 }
+.btn-green {
+  color: green;
+}

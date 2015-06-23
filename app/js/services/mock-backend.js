@@ -8,6 +8,6 @@
             // Survey Graphs
             $httpBackend.whenGET('/surveygraph').respond(MockServerModel.getGraph());
 
-            $httpBackend.whenGET(/graphs\//).passThrough();
+            $httpBackend.whenGET(/components\//).passThrough();
         });
 })();
